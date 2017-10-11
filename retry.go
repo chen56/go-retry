@@ -12,7 +12,7 @@ type Retrer struct {
 
 type Attempt struct {
 	Count   int
-	elapsed time.Duration
+	Elapsed time.Duration
 	LastErr error
 }
 
@@ -47,7 +47,7 @@ func (this Retrer) Run(retryFunc func()(err error)) (attempt Attempt,err error) 
 	for{
 		attempt.LastErr = retryFunc()
         attempt.Count++
-        attempt.elapsed=time.Now().Sub(start)
+        attempt.Elapsed =time.Now().Sub(start)
 
 		//no err ,return
 		if attempt.LastErr ==nil{
@@ -64,7 +64,7 @@ func (this Retrer) Run(retryFunc func()(err error)) (attempt Attempt,err error) 
 	}
 }
 
-func New() Retrer {
+func NewRetryer() Retrer {
 	return Retrer{
 		canRetry: func(attempt Attempt) error {
 			return nil

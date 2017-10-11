@@ -11,7 +11,7 @@ import (
 
 func Test_RetryMaxCount(t *testing.T) {
 	assert := assert.New(t)
-	retryer := New().
+	retryer := NewRetryer().
 		WithWaitFixed(1 * time.Millisecond).
 		WithRetryMaxCount(3)
 
@@ -24,13 +24,13 @@ func Test_RetryMaxCount(t *testing.T) {
 	assert.Equal("Cancel: RetryMaxCount: max(3) is reached",err.Error())
 	assert.Equal(3,retry.Count)
 	assert.Equal("sql timeout:3",retry.LastErr.Error())
-	//fmt.Println(retry.elapsed)
-	assert.Equal(true,retry.elapsed>=(3-1) * time.Millisecond)
+	//fmt.Println(retry.Elapsed)
+	assert.Equal(true,retry.Elapsed >=(3-1) * time.Millisecond)
 
 }
 
 func Ignore_Test_StopNever(t *testing.T) {
-	retryer := New().
+	retryer := NewRetryer().
 		WithWaitFixed(1 * time.Second).
 		WithRetryForever()
 
