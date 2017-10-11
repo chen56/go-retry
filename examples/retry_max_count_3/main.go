@@ -4,10 +4,12 @@ import (
 	"github.com/chen56/go-retry"
 	"fmt"
 	"errors"
+	"time"
 )
 
 func main() {
 	retryer := retry.NewRetryer().
+	    WithWaitFixed(1*time.Second).
 		WithRetryMaxCount(3)
 
 	i :=0
@@ -16,6 +18,6 @@ func main() {
 		i++
 		return errors.New(fmt.Sprintf("sql timeout %d", i))
 	})
-	fmt.Printf("result= %#v \n", result)
+	fmt.Printf("result= %+v \n", result)
 	fmt.Printf("err= %v \n",err)
 }
