@@ -54,11 +54,12 @@ func (this Retrer) Run(retryFunc func()(err error)) (attempt Attempt,err error) 
 			return attempt,nil
 		}
 
+		//can not retry,return err
 		if err = this.canRetry(attempt);err!=nil{
-			return
+			return attempt,err
 		}
 
-		//err , waitInterface
+		//wait
 		this.wait(attempt)
 	}
 }
