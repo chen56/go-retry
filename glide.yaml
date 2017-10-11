@@ -1,0 +1,12 @@
+package: github.com/chen56/retry
+homepage: https://github.com/chen56/retry
+license: MIT
+owners:
+- name: Chen Peng
+  email: chen56@msn.com
+  homepage: https://github.com/chen56
+import: []
+testImport:
+- package: github.com/stretchr/testify
+  subpackages:
+  - assert
